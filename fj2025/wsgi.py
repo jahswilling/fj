@@ -1,5 +1,5 @@
 """
-WSGI config for don project.
+WSGI config for fj2025 project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'don.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'fj2025.settings')
 
 application = get_wsgi_application()
