@@ -138,5 +138,5 @@ EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.zoho.com'  # Zoho SMTP server
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'access@fj2025.love'
+EMAIL_HOST_USER = 'fj_invite@fj2025.love'
 EMAIL_HOST_PASSWORD = 'Root@0877'
