@@ -1,0 +1,79 @@
+{% extends "index.html" %}
+{%load static%}
+
+
+{% block content %}
+
+<section class="section">
+  <br>
+  <div class="row">
+
+
+    <div class="col-lg-12 col-md-12 col-12 col-sm-12 m-auto">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Admin Staffs</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Username</th>
+                      <th scope="col">Phone No</th>
+                      <th scope="col">Profile View</th>
+                      <th scope="col">Delete</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for u in users %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{u.first_name}} {{u.last_name}}</td>
+                      <td>{{u.email}}</td>
+                      <td>{{u.username}}</td>
+                      <td>{{u.phone_no}}</td>
+                      <td> <a href="{% url "core:profile" u.pk%}" class="btn btn-outline-secondary">View</a></td>
+                      <td> <a href="{% url "core:delet_user2" u.pk%}" class="btn btn-auth-color">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- <div class="card-body">
+              <div class="row icon-container">
+                <style media="screen">
+                  #my_a {
+                    text_: none
+                  }
+                </style>
+                {% for item in quiz_list%}
+
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <a id="my_a" href="{% url "core:play" pk=item.id %}">
+                    <div class="preview">
+                      <i class="material-icons">play_circle_filled</i> <span class="icon-name">{{item}}</span>
+                    </div>
+                  </a>
+                </div>
+
+                {% endfor %}
+
+              </div>
+
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock content %}

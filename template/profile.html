@@ -1,0 +1,195 @@
+{% extends "index.html" %}
+{%load static%}
+
+
+{% block content %}
+
+<style>
+  .access-card {
+    background: linear-gradient(145deg, #2d5016, #1f3a10);
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    overflow: hidden;
+    max-width: 450px;
+    margin: 20px auto;
+  }
+  
+  .card-content {
+    padding: 40px 30px;
+  }
+  
+  .logo-text {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+    font-family: 'Georgia', serif;
+  }
+  
+  .event-title {
+    color: #ffffff;
+    font-family: 'Georgia', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 20px 0 15px;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+  
+  .event-details {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .address-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  
+  .address-text {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  
+  .guest-section {
+    margin: 25px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .guest-item {
+    flex: 1;
+  }
+  
+  .guest-label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+  }
+  
+  .guest-name {
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+  
+  .qr-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    text-align: center;
+    margin: 30px auto;
+  }
+  
+  .qr-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  
+  .card-id {
+    color: #ffffff;
+    font-size: 0.7rem;
+    margin-top: 20px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    font-family: 'Courier New', monospace;
+    opacity: 0.9;
+    text-align: center;
+  }
+</style>
+
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 m-auto">
+        <div class="card printableArea access-card" style="border: none;">
+          <div id="printableArea">
+            <div class="card-content">
+              
+              <!-- Event Title -->
+              <div class="logo-text text-center">FJ2025</div>
+              
+              <div class="event-title">
+                Flora & Jahswill
+              </div>
+              
+              <div class="event-details">
+                Saturday 1st November 2025<br/>
+                Reception Venue Access
+              </div>
+
+              <!-- Address Section -->
+              <div style="margin: 20px 0; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+                <div class="address-label">Venue</div>
+                <div class="address-text" style="word-wrap: break-word; overflow-wrap: break-word; hyphens: auto;">
+                  United Multi purpose co-operative Hall, No 1 Railway by-pass road Ujevwu, Udu, Delta State
+                </div>
+              </div>
+
+              <!-- Guest Info Section -->
+              <div class="guest-section">
+                <div class="guest-item" style="text-align: left;">
+                  <div class="guest-label">Guest</div>
+                  <div class="guest-name">{{user.full_name}}</div>
+                </div>
+                <div class="guest-item" style="text-align: right;">
+                  <div class="guest-label">Access Code</div>
+                  <div class="guest-name">{{ user.access_code }}</div>
+                </div>
+              </div>
+
+              <!-- QR Code -->
+              <div class="qr-container">
+                {% if qr_code %}
+                  <img src="{{ qr_code }}" alt="QR Code" class="qr-image">
+                {% else %}
+                  <div style="width: 200px; height: 200px; background: #f0f0f0; border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                    <span style="color: #2d5016; font-size: 0.8rem;">QR CODE</span>
+                  </div>
+                {% endif %}
+              </div>
+              
+              <div class="card-id">FJ2025</div>
+
+            </div>
+          </div>
+          <div class="card-footer text-center" style="background: #1a3a0b; border: none; padding: 20px;">
+           
+              <a href="{% url 'core:send_invite_email' user.pk %}" class="btn" style="background: linear-gradient(135deg, #d4af37, #b8941f); color: #ffffff; border: none; padding: 10px 40px; font-weight: 600; border-radius: 25px; font-size: 0.9rem; letter-spacing: 0.5px; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); transition: all 0.3s;">
+                Send
+              </a>
+         
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  function printPageArea(areaID){
+      var printContent = document.getElementById(areaID);
+      var WinPrint = window.open('', '', 'width=900,height=650');
+      WinPrint.document.write(printContent.innerHTML);
+      WinPrint.document.close();
+      WinPrint.focus();
+      WinPrint.print();
+      WinPrint.close();
+  }
+</script>
+{% endblock content %}

@@ -1,0 +1,114 @@
+{% extends "index.html" %}
+{%load static%}
+
+
+{% block content %}
+
+<section class="section">
+  <br>
+  <div class="row">
+
+
+    <div class="col-lg-12 col-md-12 col-12 col-sm-12 m-auto">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <h4>Guest Information</h4>
+              <a href="{% url 'core:send_invite_to_all_guests' %}" class="btn btn-primary">Send to All Eligible Guests</a>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Full Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Joining</th>
+                      <th scope="col">Blacklist</th>
+                      <th scope="col">Checked In</th>
+                      <th scope="col">Invite Sent</th>
+                      <th scope="col">Access Code</th>
+                      <th scope="col">Number</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for u in users %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{u.full_name}}</td>
+                      <td>{{u.email|default:"N/A"}}</td>
+                      <td>
+                        <span class="badge {% if u.joining == 'Yes' %}badge-success{% else %}badge-danger{% endif %}">{{ u.joining }}</span>
+                      </td>
+                      <td>
+                        <span class="badge {% if u.black_list %}badge-danger{% else %}badge-success{% endif %}">{{ u.black_list|yesno:"Yes,No" }}</span>
+                      </td>
+                      <td>
+                        {% if u.checked_in %}
+                          <span class="badge badge-success">Yes</span>
+                        {% else %}
+                          <span class="badge badge-secondary">No</span>
+                        {% endif %}
+                      </td>
+                      <td>
+                        {% if u.invite_sent %}
+                          <span class="badge badge-success">Yes</span>
+                        {% else %}
+                          <span class="badge badge-secondary">No</span>
+                        {% endif %}
+                      </td>
+                      <td>{{u.access_code}}</td>
+                      <td>{{u.number}}</td>
+                      <td>
+                        <a href="{% url 'core:profile' u.pk %}" class="btn btn-outline-secondary btn-sm">View</a>
+                        {% if u.black_list %}
+                          <a href="{% url 'core:toggle_blacklist' u.pk %}" class="btn btn-danger btn-sm">Unblacklist</a>
+                        {% else %}
+                          <a href="{% url 'core:toggle_blacklist' u.pk %}" class="btn btn-warning btn-sm">Blacklist</a>
+                        {% endif %}
+                        {% if not u.checked_in %}
+                          <a href="{% url 'core:checkin' u.pk %}" class="btn btn-success btn-sm">Check In</a>
+                        {% endif %}
+                        {% if u.email and 'noemail.fj25' not in u.email and not u.black_list %}
+                          <a href="{% url 'core:send_invite_email' u.pk %}" class="btn btn-primary btn-sm">Send</a>
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- <div class="card-body">
+              <div class="row icon-container">
+                <style media="screen">
+                  #my_a {
+                    text_: none
+                  }
+                </style>
+                {% for item in quiz_list%}
+
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <a id="my_a" href="{% url "core:play" pk=item.id %}">
+                    <div class="preview">
+                      <i class="material-icons">play_circle_filled</i> <span class="icon-name">{{item}}</span>
+                    </div>
+                  </a>
+                </div>
+
+                {% endfor %}
+
+              </div>
+
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+{% endblock content %}

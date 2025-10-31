@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{%load static%}
+
+
+{% block content %}
+
+<section class="section">
+  <br>
+  <div class="row">
+
+
+    <form
+      method="post"
+      action=""
+      class="form-horizontal"
+      enctype="multipart/form-data"
+    >
+    {% csrf_token %}
+      <div class="form-group">
+        <h3><b>Bulk Upload</b></h3>
+        <label for="exampleFormControlSelect1">Choose a Database Table:</label>
+        
+        <label for="">Select a xlsx or csv file:</label>
+        <input
+          type="file"
+          class="form-control form-control-file"
+          name="myfile"
+        />
+        <br />
+        <input type="submit" class="btn btn-primary" value="Upload" />
+      </div>
+    </form>
+
+  </div>
+</section>
+{% endblock content %}

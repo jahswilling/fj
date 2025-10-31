@@ -1,0 +1,157 @@
+{%load static%}
+
+<section class="section">
+
+  <div class="section-body">
+    <div class="row mt-sm-4 background-image-body">
+      <div class="col-md-12 col-lg-12 box-center">
+        <div class="row author-box">
+
+          <img alt="image" src="{% static "assets/img/user.jpg" %}" class="rounded-circle author-box-picture box-center mt-4">
+
+        </div>
+        <div class="row author-box">
+          <div class="page-inner box-center align-center">
+            <h2><a href="#">{{request.user.first_name}} {{request.user.last_name}}</a></h2>
+            <div class="page-description">
+              <h5>{{request.user.phone_no}}</h5>
+            </div>
+          </div>
+        </div>
+        <div class="row author-box mb-4">
+          <div class="box-center align-center">
+            <div class="mb-2 mt-3">
+              <h6>{{request.user.email}}</h6>
+            </div>
+
+            <div class="w-100 d-sm-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-sm-4">
+      <div class="col-12 col-md-12 col-lg-4">
+        <div class="card">
+          <div class="card-header">
+            <h4>Personal Details</h4>
+          </div>
+          <div class="card-body">
+            <div class="py-4">
+              <p class="clearfix">
+                <span class="float-left">
+                  Unique Code
+                </span>
+                <span class="float-right text-muted">
+                  {{request.user.unique_code}}
+                </span>
+              </p>
+              <p class="clearfix">
+                <span class="float-left">
+                Account Number
+                </span>
+                <span class="float-right text-muted">
+                {{request.user.account_no}}
+                </span>
+              </p>
+              <p class="clearfix">
+                <span class="float-left">
+                  Bank Name
+                </span>
+                <span class="float-right text-muted">
+                  {{request.user.bank}}
+                </span>
+              </p>
+              <p class="clearfix">
+                <span class="float-left">
+                  Referred By
+                </span>
+                <span class="float-right text-muted">
+                  {{request.user.referred_by}}
+                </span>
+              </p>
+              <p class="clearfix">
+                <span class="float-left">
+                  Last Login
+                </span>
+                <span class="float-right text-muted">
+                  {{request.user.last_login}}
+                </span>
+              </p>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-12 col-md-12 col-lg-8">
+        <div class="card">
+          <form  class="needs-validation">
+
+            <div class="card-header">
+              <h4>View Details</h4>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="form-group col-md-6 col-12">
+                  <label>Plan1</label>
+                  <input type="text" name="plan1" class="form-control" disabled value="{{user.plan1}}">
+                  <div class="invalid-feedback">
+                    Please fill in the first name
+                  </div>
+                </div>
+                <div class="form-group col-md-6 col-12">
+                  <label>Plan2</label>
+                  <input type="text" name="plan2" class="form-control" disabled value="{{user.plan2}}">
+                  <div class="invalid-feedback">
+                    Please fill in the last name
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="form-group col-md-6 col-12">
+                  <label>Plan3</label>
+                  <input type="text" name="plan3" class="form-control" disabled value="{{user.plan3}}">
+                  <div class="invalid-feedback">
+                    Please fill in the email
+                  </div>
+                </div>
+                <div class="form-group col-md-6 col-12">
+                  <label>Plan4</label>
+                  <input type="text" name="plan4" class="form-control" disabled value="{{user.plan4}}">
+                  <div class="invalid-feedback">
+                    Please fill in the email
+                  </div>
+                </div>
+                <div class="form-group col-md-12 col-12">
+                  <label>Plan5</label>
+                  <input type="text" name="plan5" class="form-control" disabled value="{{user.plan5}}">
+                  <div class="invalid-feedback">
+                    Please fill in the email
+                  </div>
+                </div>
+
+
+              </div>
+
+              <div class="row">
+                <div class="form-group col-12">
+                  <label>Pay Date.</label>
+                  <textarea disabled name="referrals" class="form-control summernote-simple">{{user.pay_date}}</textarea>
+                </div>
+                <div class="form-group col-12">
+                  <label>Referrals</label>
+                  <textarea disabled name="referrals" class="form-control summernote-simple">{{user.referrals}}</textarea>
+                </div>
+              </div>
+
+            </div>
+            <div class="card-footer text-right">
+              <a href="https://wa.me/+2349029021706?text=Hello%20DonsAgency,%20I%20wish%20to%20make%20a%20Deposit%20of:%20_______" class="btn btn-primary">Deposit</a>
+              <a href="https://wa.me/+2349029021706?text=Hello%20DonsAgency,%20I%20{{request.user.first_name}}%20{{request.user.last_name}}%20wish%20to%20request%20a%20payment,%20Today%20been%20my%20payment%20date.%20My%20Unique%20Code%20is:%20{{user.unique_code}}" class="btn btn-success">Withdraw</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

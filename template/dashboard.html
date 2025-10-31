@@ -1,0 +1,153 @@
+{% extends "index.html" %}
+{%load static%}
+
+
+{% block content %}
+
+{% if request.user.is_staff%}
+<section class="section">
+  <div class="section-header">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+        <div class="section-header-breadcrumb-content">
+          <h1>Dashboard</h1>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+      <div class="card card-statistic-1">
+        <div class="card-icon-square card-icon-bg-green">
+          <i class="fas fas fa-user-friends"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="padding-20">
+            <div class="text-right">
+              <h3 class="font-light mb-0">
+                <i class="ti-arrow-up text-success"></i> {{users1.count}}
+              </h3>
+              <span class="text-muted">Total Clients</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+      <div class="card card-statistic-1">
+        <div class="card-icon-square card-icon-bg-cyan">
+          <i class="fas fa-user-cog"></i>
+        </div>
+        <div class="card-wrap">
+          <div class="padding-20">
+            <div class="text-right">
+              <h3 class="font-light mb-0">
+                <i class="ti-arrow-up text-success"></i> {{users2.count}}
+              </h3>
+              <span class="text-muted">Admin Users</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+
+
+
+    <div class="col-lg-8 col-md-12 col-12 col-sm-12">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h4>Our Members.</h4>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-striped table-hover" id="save-stage" style="width:100%;">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Username</th>
+                      <th scope="col" class="text-center">Unique Code</th>
+                      <th scope="col">Phone No</th>
+                      <th scope="col">Referred_by</th>
+                      <th scope="col">Profile View</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for u in users %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{u.first_name}} {{u.last_name}}</td>
+                      <td>{{u.email}}</td>
+                      <td>{{u.username}}</td>
+                      <td class="text-center">{{u.unique_code}}</td>
+                      <td>{{u.phone_no}}</td>
+                      <td>{{u.referred_by}}</td>
+                      <td>  <a href="{% url "core:profile" u.pk%}" class="btn btn-outline-secondary">View</a></td>
+
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                </div>
+            </div>
+            <!-- <div class="card-body">
+              <div class="row icon-container">
+                <style media="screen">
+                  #my_a {
+                    text_: none
+                  }
+                </style>
+                {% for item in quiz_list%}
+
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                  <a id="my_a" href="{% url "core:play" pk=item.id %}">
+                    <div class="preview">
+                      <i class="material-icons">play_circle_filled</i> <span class="icon-name">{{item}}</span>
+                    </div>
+                  </a>
+                </div>
+
+                {% endfor %}
+
+              </div>
+
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-12 col-12 col-sm-12">
+      <div class="card">
+        <div class="card-header mt-1 mb-1">
+          <h4>Activities.</h4>
+        </div>
+        <div class="card-body mt-3 mb-3">
+          <div class="timeline-activity-widget">
+            {%for a in activities %}
+            <div class="widget-activity-item1">
+              <div class="text-muted">{{a.timestamp}}</div>
+              <p>{{a.user}} {{a.title}}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% else %}
+  {% include 'user_view.html'%}
+{% endif %}
+
+{% endblock content %}
