@@ -215,9 +215,9 @@ def send_invite_email(request, pk):
     if guest.black_list:
         messages.error(request, f"Cannot send invite: Guest {guest.full_name} is blacklisted.")
         return redirect('core:user_list')
-    if guest.invite_sent:
-        messages.info(request, f"Already sent invite to {guest.full_name}.")
-        return redirect('core:user_list')
+    # if guest.invite_sent:
+    #     messages.info(request, f"Already sent invite to {guest.full_name}.")
+    #     return redirect('core:user_list')
     # Generate QR code if not exists
     if not guest.qr_code:
         import qrcode
